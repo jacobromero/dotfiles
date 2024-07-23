@@ -1,10 +1,10 @@
 local home = os.getenv('HOME')
 local jdtls = require('jdtls')
 
-require("dapui").setup()
-require("neodev").setup({
-  library = { plugins = { "nvim-dap-ui" }, types = true },
-})
+-- require("dapui").setup()
+-- require("neodev").setup({
+--   library = { plugins = { "nvim-dap-ui" }, types = true },
+-- })
 
 -- root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
 local root_dir = require("jdtls.setup").find_root({ "packageInfo" }, "Config")
@@ -27,10 +27,10 @@ end
 -- current project found using the root_marker as the folder for project specific data.
 local workspace_folder = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
-local bundles = {
-    vim.fn.glob(home .. "/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 1),
-};
-vim.list_extend(bundles, vim.split(vim.fn.glob("/home/jpromero/.local/share/nvim/mason/packages/java-test/extension/server/*.jar", 1), "\n"))
+-- local bundles = {
+--     vim.fn.glob(home .. "/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", 1),
+-- };
+-- vim.list_extend(bundles, vim.split(vim.fn.glob("/home/jpromero/.local/share/nvim/mason/packages/java-test/extension/server/*.jar", 1), "\n"))
 
 local config = {
     flags = {
@@ -39,8 +39,8 @@ local config = {
     on_attach = on_attach,  -- We pass our on_attach keybindings to the configuration map
     root_dir = root_dir, -- Set the root directory to our found root_marker
     init_options = {
-        workspaceFodlers = ws_folders_jdtls,
-        bundles = bundles,
+        workspaceFolders = ws_folders_jdtls,
+        -- bundles = bundles,
     },
     -- Here you can configure eclipse.jdt.ls specific settings
     -- These are defined by the eclipse.jdt.ls project and will be passed to eclipse when starting.
@@ -151,7 +151,7 @@ function bemol()
 end
 bemol()
 
-local dap = require('dap')
+-- local dap = require('dap')
 -- dap.configurations.java = {
 --     {
 --         type = 'java';
@@ -166,15 +166,15 @@ local dap = require('dap')
 jdtls.start_or_attach(config)
 
 
-vim.keymap.set('n', '<leader>D', function()
-    dap.configurations.java = {
-        {
-            type = 'java';
-            request = 'attach';
-            name = "Debug (Attach) - Remote";
-            hostName = "localhost";
-            port = 7002;
-        },
-    }
-    dap.continue()
-end)
+-- vim.keymap.set('n', '<leader>D', function()
+--     dap.configurations.java = {
+--         {
+--             type = 'java';
+--             request = 'attach';
+--             name = "Debug (Attach) - Remote";
+--             hostName = "localhost";
+--             port = 7002;
+--         },
+--     }
+--     dap.continue()
+-- end)

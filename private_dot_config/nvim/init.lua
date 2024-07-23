@@ -13,6 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.maplocalleader = ","
 require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
@@ -32,17 +33,25 @@ require("lazy").setup({
     { 'tanvirtin/monokai.nvim' },
     {
         "nvim-treesitter/nvim-treesitter",
-        -- build = ":TSUpdate",
-        -- config = function ()
-        --     local configs = require("nvim-treesitter.configs")
-        --
-        --     configs.setup({
-        --         -- ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
-        --         sync_install = false,
-        --         highlight = { enable = true },
-        --         indent = { enable = true },
-        --     })
-        -- end
+        build = ":TSUpdate",
+        config = function ()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                ensure_installed = {
+                    'c',
+                    'lua',
+                    'vim',
+                    'vimdoc',
+                    'query',
+                    'javascript',
+                    'python',
+                    'java',
+                },
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -89,7 +98,7 @@ require("lazy").setup({
     },
     { 'airblade/vim-gitgutter' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-telescope/telescope-dap.nvim' },
+    -- { 'nvim-telescope/telescope-dap.nvim' },
     {
         'matbme/JABS.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' }
@@ -133,22 +142,42 @@ require("lazy").setup({
             }
         end
     },
-    { 'chentoast/marks.nvim' },
-    { 'exafunction/codeium.vim' },
-    {
-        'mfussenegger/nvim-dap',
-        dependencies = {
-            "nvim-neotest/nvim-nio"
-        },
-    },
-    { 'folke/neodev.nvim' },
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = {"mfussenegger/nvim-dap"},
-    },
+    -- { 'exafunction/codeium.vim' },
+    -- {
+    --     'mfussenegger/nvim-dap',
+    --     dependencies = {
+    --         "nvim-neotest/nvim-nio"
+    --     },
+    -- },
+    -- { 'folke/neodev.nvim' },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = {"mfussenegger/nvim-dap"},
+    -- },
     { 'echasnovski/mini.splitjoin' },
     { 'echasnovski/mini.surround', version = '*' },
     { 'echasnovski/mini.indentscope', version = '*' },
+    {
+        'echasnovski/mini.files',
+        version = '*',
+        config = function ()
+            require('mini.files').setup();
+        end,
+    },
+    -- {
+    --     'echasnovski/mini.bracketed',
+    --     version = '*',
+    --     config = function ()
+    --         require('mini.bracketed').setup();
+    --     end,
+    -- },
+    {
+        'echasnovski/mini.ai',
+        version = '*',
+        config = function()
+            require('mini.ai').setup();
+        end
+    },
     { 'mg979/vim-visual-multi' },
     -- {
     --     "smoka7/multicursors.nvim",
@@ -204,9 +233,67 @@ require("lazy").setup({
     },
     {
         'preservim/vimux',
-    }
+    },
+    {
+        "benlubas/molten-nvim",
+        version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+        build = ":UpdateRemotePlugins",
+        init = function()
+            -- this is an example, not a default. Please see the readme for more configuration options
+            vim.g.molten_output_win_max_height = 12
+        end,
+    },
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+    },
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
+    },
+    {
+        "nvim-neorg/neorg",
+        dependencies = {
+            "luarocks.nvim",
+            "folke/zen-mode.nvim"
+        },
+        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+        version = "*", -- Pin Neorg to the latest stable release
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.ui"] = {},
+                    ["core.export"] = {},
+                    ["core.presenter"] = {
+                        config = {
+                            zen_mode = "zen-mode",
+                        },
+                    },
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                                work = "~/notes/work",
+                            },
+                            default_workspace = "notes",
+                        },
+                    },
+                },
+            }
+
+            vim.wo.foldlevel = 99
+            vim.wo.conceallevel = 2
+        end,
+    },
 }, opt);
 
-if vim.g.vscode then
-    require('jpromero')
-end
+-- if vim.g.vscode then
+require('jpromero')
+-- end

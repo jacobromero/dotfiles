@@ -91,9 +91,11 @@
           set -U fish_user_paths /bin /usr/bin/ /usr/local/bin $fish_user_paths
           set -U fish_user_paths $fish_user_paths /home/jpromero/.local/bin
           set -U fish_user_paths $fish_user_paths /home/jpromero/.toolbox/bin
+          set -U fish_user_paths /home/linuxbrew/.linuxbrew/bin $fish_user_paths
           set -U fish_user_paths /home/jpromero/.local/share/mise/shims /home/jpromero/.nix-profile/bin $fish_user_paths
           set -x EDITOR nvim
           set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+          set -x MANROFFOPT "-c"
           source ~/.config/fish/atuin_init.fish
           source ~/.config/fish/zoxide_init.fish
           mise activate fish | source
@@ -101,9 +103,9 @@
           set -U __done_allow_nongraphical 1
           set -U __done_notification_command "tput bel"
 
-          set -U JAVA_HOME ~/.nix-profile/lib/openjdk/
-          set -U SSL_CERT_FILE /etc/ssl/certs/ca-bundle.crt
-          set -U NIX_SSL_CERT_FILE /etc/ssl/certs/ca-bundle.crt
+          set -x JAVA_HOME ~/.nix-profile/lib/openjdk/
+          set -x SSL_CERT_FILE /etc/ssl/certs/ca-bundle.crt
+          set -x NIX_SSL_CERT_FILE /etc/ssl/certs/ca-bundle.crt
       '';
 
       functions = {
@@ -130,6 +132,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    libgcc
     atuin
     bash
     bat
@@ -148,12 +151,10 @@
     lazygit
     lsd
     neovim
-    nodejs_20
     parallel
     procs
     ripgrep
     rsync
-    stow
     tmux
     util-linux
     viddy
@@ -163,7 +164,25 @@
     jdk21
     ticker
     chezmoi
-    podman
+    nodejs_20
+    gron
+    spruce
+    luajit
+    zig
+    presenterm
+    choose
+    zellij
+    newsboat
+    tuir
+    st
+    lazydocker
+    mise
+    curlie
+    procs
+    sd
+    jnv
+    gomuks
+    imagemagick
   ];
 
   # Let Home Manager install and manage itself.

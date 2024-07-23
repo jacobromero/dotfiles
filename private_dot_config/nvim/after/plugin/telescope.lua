@@ -3,7 +3,7 @@ local builtin = require('telescope.builtin')
 require("telescope").setup {
     defaults = {
         wrap_results = true,
-        path_display = {"tail"},
+        path_display = {"filename_first"},
     },
     pickers = {
         find_files = {
@@ -48,7 +48,7 @@ end
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n','<leader>gf', ':lua require("telescope.builtin").git_files({ use_file_path = true })<CR>', {})
 vim.keymap.set('n','<leader><leader>gf', function() live_grep_git_root() end, {})
-vim.keymap.set('n','<leader><leader>gs', ':lua require("telescope.builtin").git_status({ use_file_path = true, initial_mode = "normal" })<CR>', {})
+-- vim.keymap.set('n','<leader><leader>gs', ':lua require("telescope.builtin").git_status({ use_file_path = true, initial_mode = "normal" })<CR>', {})
 vim.keymap.set('n', '<C-f>', builtin.live_grep, {})
 vim.keymap.set('n', '<C-F>', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 vim.keymap.set('v', '<C-f>', function()

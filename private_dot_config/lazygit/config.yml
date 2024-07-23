@@ -1,0 +1,10 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+
+customCommands:
+  - key: '<c-c>'
+    context: 'global'
+    command: 'cr --parent HEAD^'
+    showOutput: true
