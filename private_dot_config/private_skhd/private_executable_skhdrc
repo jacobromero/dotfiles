@@ -1,0 +1,29 @@
+# Float / Unfloat window
+hyper - t : \
+    yabai -m window --toggle float; \
+    yabai -m window --toggle border
+
+# Move focus
+cmd + shift - h : yabai -m window --focus west
+cmd + shift - j : yabai -m window --focus south
+cmd + shift - k : yabai -m window --focus north
+cmd + shift - l : yabai -m window --focus east
+
+# Move desktops
+hyper - n : ~/.config/yabai/space_prev.sh
+hyper - m : ~/.config/yabai/space_next.sh
+hyper - j : yabai -m display --focus next
+hyper - k : yabai -m display --focus prev
+
+# increase window size
+shift + cmd + ctrl - h : yabai -m window --resize left:-20:0
+shift + cmd + ctrl - j : yabai -m window --resize bottom:0:20
+shift + cmd + ctrl - k : yabai -m window --resize bottom:0:-20
+shift + cmd + ctrl - l : yabai -m window --resize left:20:0
+
+cmd + ctrl - h : yabai -m window --warp west
+cmd + ctrl - j : yabai -m window --warp north
+cmd + ctrl - k : yabai -m window --warp south
+cmd + ctrl - l : yabai -m window --warp east
+cmd + ctrl - s : yabai -m window --toggle split
+
