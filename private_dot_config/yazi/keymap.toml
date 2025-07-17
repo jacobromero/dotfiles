@@ -1,4 +1,0 @@
-[manager]
-prepend_keymap = [
-    { on = [ 'g', 'w' ], run = 'cd ~/workspace', desc = 'Go to workspace' },
-]

@@ -1,6 +1,0 @@
-name: tmux-tea
-root: <%= ENV["PWD"] %>
-
-windows:
-  - 'neovim  ': nvim bin/tea.sh
-  - 'git  ': lazygit

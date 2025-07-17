@@ -1,9 +1,0 @@
-*~
-\#*
-tests/
-.DS_Store
-*.sublime-*
-
-# olint linter config
-.olint.conf
-.cache.olint
